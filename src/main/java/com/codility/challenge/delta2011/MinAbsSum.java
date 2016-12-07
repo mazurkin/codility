@@ -34,14 +34,14 @@ public class MinAbsSum {
             counts[v] = counts[v] + 1;
         }
 
-        int[] dp = new int[sum];
+        int[] dp = new int[sum + 1];
         Arrays.fill(dp, -1);
         dp[0] = 0;
 
         for (int i = 1; i <= max; i++) {
             final int count = counts[i];
             if (count > 0) {
-                for (int j = 0; j < sum; j++) {
+                for (int j = 0; j <= sum; j++) {
                     if (dp[j] >= 0) {
                         dp[j] = count;
                     } else if (j >= i && dp[j - i] > 0) {
