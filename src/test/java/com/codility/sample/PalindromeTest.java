@@ -1,4 +1,4 @@
-package com.codility.samples;
+package com.codility.sample;
 
 import org.junit.Assert;
 import org.junit.Before;

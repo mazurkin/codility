@@ -2,6 +2,9 @@ package com.codility.challenge.alpha2010;
 
 import java.util.BitSet;
 
+/**
+ * https://codility.com/programmers/task/prefix_set/
+ */
 public class PrefixSet {
 
     public int solution(int[] a) {

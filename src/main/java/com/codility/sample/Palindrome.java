@@ -1,4 +1,4 @@
-package com.codility.samples;
+package com.codility.sample;
 
 /**
  * http://e-maxx.ru/algo/palindromes_count

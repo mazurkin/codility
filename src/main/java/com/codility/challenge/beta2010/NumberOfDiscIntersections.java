@@ -2,6 +2,9 @@ package com.codility.challenge.beta2010;
 
 import java.util.Arrays;
 
+/**
+ * https://codility.com/programmers/task/number_of_disc_intersections/
+ */
 public class NumberOfDiscIntersections {
 
     public int solution(int[] a) {
