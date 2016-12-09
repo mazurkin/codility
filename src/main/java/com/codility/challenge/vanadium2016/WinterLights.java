@@ -5,6 +5,8 @@ package com.codility.challenge.vanadium2016;
  */
 public class WinterLights {
 
+    private static final int MODULO = 1000000007;
+
     public int solution(String s) {
         return solutionBest(s, 10);
     }
@@ -47,7 +49,8 @@ public class WinterLights {
                 localCount += counts[j ^ globalMask];
             }
 
-            globalCount += localCount;
+            globalCount = globalCount + localCount;
+            globalCount = globalCount % MODULO;
         }
 
         return globalCount;
@@ -94,7 +97,8 @@ public class WinterLights {
                 localCount += counts2[j];
             }
 
-            globalCount += localCount;
+            globalCount = globalCount + localCount;
+            globalCount = globalCount % MODULO;
 
             final int[] tmp = counts1;
             counts1 = counts2;
@@ -128,6 +132,7 @@ public class WinterLights {
             }
 
             globalCount = globalCount + localCount;
+            globalCount = globalCount % MODULO;
         }
 
         return globalCount;
