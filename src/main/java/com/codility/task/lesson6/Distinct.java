@@ -2,6 +2,9 @@ package com.codility.task.lesson6;
 
 import java.util.Arrays;
 
+/**
+ * https://codility.com/programmers/lessons/6-sorting/distinct/
+ */
 public class Distinct {
 
     public int solution(int[] a) {
