@@ -15,20 +15,16 @@ public class BracketsRotation {
         }
 
         final int n = s.length();
-        if (k >= n / 2 + 1) {
-            return n;
-        }
-
         final char[] chars = s.toCharArray();
 
         int globalResult = 0;
 
-        for (int i = 0; i < n - 1; i++) {
+        for (int i = 0; i < n; i++) {
             int balance = 0;
             int result = 0;
             int budget = k;
 
-            for (int j = i, rest = n - i; j < n; j++, rest--) {
+            for (int j = i, rest = n - j; j < n; j++, rest--) {
                 if (chars[j] == '(') {
                     if (balance + 1 <= rest - 1) {
                         balance++;
