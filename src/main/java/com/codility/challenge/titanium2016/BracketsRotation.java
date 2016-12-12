@@ -13,7 +13,7 @@ public class BracketsRotation {
         return solutionSlow(s, k);
     }
 
-    public int solutionSlow(String s, int k) {
+    public int solutionSlow(final String s, final int k) {
         if (s == null || s.isEmpty()) {
             return 0;
         }
@@ -21,15 +21,18 @@ public class BracketsRotation {
         final int n = s.length();
         final char[] chars = s.toCharArray();
 
-        int globalResult = 0;
+        int result = 0;
 
         for (int i = 0; i < n; i++) {
-            int result = 0;
-
             int balance = 0;
             int budget = k;
 
-            for (int j = i, rest = n - j; j < n; j++, rest--) {
+            int rest = n - i;
+            if (rest <= result) {
+                break;
+            }
+
+            for (int j = i; j < n; j++, rest--) {
                 final char c = chars[j];
 
                 if (c == BRACKET_OPEN) {
@@ -50,17 +53,17 @@ public class BracketsRotation {
                     } else {
                         break;
                     }
+                } else {
+                    throw new IllegalArgumentException("Unknown char: " + c);
                 }
 
                 if (balance == 0) {
                     result = Math.max(result, j - i + 1);
                 }
             }
-
-            globalResult = Math.max(globalResult, result);
         }
 
-        return globalResult;
+        return result;
     }
 
     public int solutionFast(final String s, final int k) {
@@ -68,15 +71,14 @@ public class BracketsRotation {
             return 0;
         }
 
-        final int N = s.length();
-
-        if (k >= N / 2 + 1) {
-            return N;
+        final int n = s.length();
+        if (k >= n / 2 + 1) {
+            return n;
         }
 
         final char[] brackets = s.toCharArray();
 
-        return solutionFast(brackets, 0, N, k);
+        return solutionFast(brackets, 0, n, k);
     }
 
     private int solutionFast(final char[] brackets, final int offset, final int count, final int k) {
