@@ -27,7 +27,6 @@ public class MinAbsSum {
             sum = sum + v;
         }
 
-
         final int[] counts = new int[max + 1];
         for (int i = 0; i < n; i++) {
             final int v = abs[i];
