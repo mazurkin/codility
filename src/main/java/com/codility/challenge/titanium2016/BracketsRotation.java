@@ -5,6 +5,10 @@ package com.codility.challenge.titanium2016;
  */
 public class BracketsRotation {
 
+    private static final char BRACKET_OPEN = '(';
+
+    private static final char BRACKET_CLOSE = ')';
+
     public int solution(String s, int k) {
         return solutionSlow(s, k);
     }
@@ -20,12 +24,15 @@ public class BracketsRotation {
         int globalResult = 0;
 
         for (int i = 0; i < n; i++) {
-            int balance = 0;
             int result = 0;
+
+            int balance = 0;
             int budget = k;
 
             for (int j = i, rest = n - j; j < n; j++, rest--) {
-                if (chars[j] == '(') {
+                final char c = chars[j];
+
+                if (c == BRACKET_OPEN) {
                     if (balance + 1 <= rest - 1) {
                         balance++;
                     } else if (budget > 0) {
@@ -34,7 +41,7 @@ public class BracketsRotation {
                     } else {
                         break;
                     }
-                } else {
+                } else if (c == BRACKET_CLOSE){
                     if (balance > 0) {
                         balance--;
                     } else if (budget > 0) {
