@@ -2,11 +2,14 @@ package com.codility.challenge.gamma2011;
 
 /**
  * https://codility.com/programmers/task/count_palindromic_slices/
+ * https://en.wikipedia.org/wiki/Longest_palindromic_substring#Manacher.27s_algorithm
  */
 public class CountPalindromicSlices {
 
     public int solution(String s) {
         final int MAX_COUNT = 100000000;
+
+        // modified Manacher's algorithm
 
         final char[] chars = s.toCharArray();
         final int n = chars.length;
