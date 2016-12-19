@@ -7,6 +7,8 @@ import java.util.Arrays;
  */
 public class NumberOfDiscIntersections {
 
+    private static final int END_MASK = 0x01;
+
     public int solution(int[] a) {
         final int MAX_COUNT = 10000000;
 
@@ -18,14 +20,14 @@ public class NumberOfDiscIntersections {
         final long[] points = new long[2 * n];
 
         for (int i = 0, j = 0; i < n; i++) {
-            final long r = a[i];
-            final long c = i;
+            final long radius = a[i];
+            final long center = i;
 
             // start point (comes first on sort)
-            points[j++] = ((c - r) << 1);
+            points[j++] = ((center - radius) << 1);
 
             // end point (comes after on sort)
-            points[j++] = ((c + r) << 1) + 1;
+            points[j++] = ((center + radius) << 1) | END_MASK;
         }
 
         Arrays.sort(points);
@@ -34,7 +36,7 @@ public class NumberOfDiscIntersections {
         int tracker = 0;
 
         for (long point : points) {
-            if ((point & 0x01) == 0) {
+            if ((point & END_MASK) == 0) {
                 result += tracker;
 
                 if (result > MAX_COUNT) {

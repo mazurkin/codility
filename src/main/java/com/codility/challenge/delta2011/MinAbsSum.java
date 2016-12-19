@@ -21,6 +21,7 @@ public class MinAbsSum {
 
         for (int i = 0; i < n; i++) {
             final int v = Math.abs(a[i]);
+
             abs[i] = v;
 
             max = Math.max(max, v);
@@ -33,7 +34,7 @@ public class MinAbsSum {
             counts[v] = counts[v] + 1;
         }
 
-        int[] dp = new int[sum + 1];
+        final int[] dp = new int[sum + 1];
         Arrays.fill(dp, -1);
         dp[0] = 0;
 

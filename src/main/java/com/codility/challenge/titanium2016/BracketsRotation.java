@@ -13,6 +13,10 @@ public class BracketsRotation {
         return solutionSlow(s, k);
     }
 
+    /**
+     * time: O(n^2)
+     * space: O(1)
+     */
     public int solutionSlow(final String s, final int k) {
         if (s == null || s.isEmpty()) {
             return 0;
