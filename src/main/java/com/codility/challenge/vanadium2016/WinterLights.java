@@ -20,15 +20,19 @@ public class WinterLights {
             return 0;
         }
 
+        if (dictionarySize < 1 || dictionarySize > 31) {
+            throw new IllegalArgumentException("Dictionary size is invalid");
+        }
+
         final int n = s.length();
         final char[] chars = s.toCharArray();
 
-        // Space is 2^dictionarySize when each symbol need 1 bit (odd or even)
+        // Space is 2**dictionarySize (each symbol needs 1 bit of address space)
         final int capacity = 1 << dictionarySize;
 
-        // Index of array is bitmask "b10/b9/b8/b7/b6/b5/b4/b3/b2/b1" where
-        //    bX == 1 means that X occurred odd times
-        //    bX == 0 means that X occurred even times
+        // Index of array is bitmask "b9/b8/b7/b6/b5/b4/b3/b2/b1/b0" where
+        //   bX == 1 means that symbol X occurred odd times
+        //   bX == 0 means that symbol X occurred even times
         final int[] counts = new int[capacity];
 
         int globalCount = 0;
@@ -117,7 +121,7 @@ public class WinterLights {
     }
 
     /**
-     * time: O(n^2)
+     * time: O(n**2)
      * space: O(1)
      */
     public int solutionSlow(String s) {

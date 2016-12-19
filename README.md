@@ -15,7 +15,7 @@ already finished [Codility.com](https://codility.com/programmers/challenges/) ch
 
 #### titanium2016
 
-Working on it. While only O(n^2)/O(1) is implemented
+Working on it. While only O(n**2)/O(1) is implemented
 
 [Task](https://codility.com/programmers/task/brackets_rotation/)
 [Solution](src/main/java/com/codility/challenge/titanium2016/BracketsRotation.java)

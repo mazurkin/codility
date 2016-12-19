@@ -14,7 +14,7 @@ public class BracketsRotation {
     }
 
     /**
-     * time: O(n^2)
+     * time: O(n**2)
      * space: O(1)
      */
     public int solutionSlow(final String s, final int k) {
@@ -69,39 +69,5 @@ public class BracketsRotation {
 
         return result;
     }
-
-    public int solutionFast(final String s, final int k) {
-        if (s == null || s.isEmpty()) {
-            return 0;
-        }
-
-        final int n = s.length();
-        if (k >= n / 2 + 1) {
-            return n;
-        }
-
-        final char[] brackets = s.toCharArray();
-
-        return solutionFast(brackets, 0, n, k);
-    }
-
-    private int solutionFast(final char[] brackets, final int offset, final int count, final int k) {
-        if (count < 2) {
-            return 0;
-        }
-
-        if (count % 2 == 1) {
-            final int r1 = solutionFast(brackets, offset, count - 1, k);
-            final int r2 = solutionFast(brackets, offset + 1, count - 1, k);
-            return Math.max(r1, r2);
-        }
-
-        int r1 = 0;
-
-        final int r2 = solutionFast(brackets, offset + 1, count - 1, k);
-
-        return Math.max(r1, r2);
-    }
-
 
 }
