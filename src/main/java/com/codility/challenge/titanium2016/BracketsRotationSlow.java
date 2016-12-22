@@ -1,11 +1,12 @@
 package com.codility.challenge.titanium2016;
 
-import java.util.BitSet;
-
 /**
  * https://codility.com/programmers/task/brackets_rotation/
+ *
+ * time: O(n**2)
+ * space: O(1)
  */
-public class BracketsRotation {
+public class BracketsRotationSlow {
 
     private static final char BRACKET_OPEN = '(';
 
@@ -16,35 +17,22 @@ public class BracketsRotation {
             return 0;
         }
 
-        if (k < 0) {
-            throw new IllegalArgumentException("Budget k is invalid");
-        }
-
         final int n = s.length();
         final char[] chars = s.toCharArray();
 
         int result = 0;
 
-        final BitSet modifications = new BitSet(n);
+        for (int i = 0; result < n - i; i++) {
+            int balance = 0;
+            int budget = k;
 
-        int balance = 0;
-
-        int detectionLeft = 0;
-        int detectionRight = 0;
-        int detectionCost = 0;
-
-        while (result < n - detectionLeft) {
-            int budget = k - detectionCost;
-
-            for (int p = detectionRight; p < n; p++) {
-                final char c = chars[p];
+            for (int j = i; j < n; j++) {
+                final char c = chars[j];
 
                 if (c == BRACKET_OPEN) {
-                    if (balance + 1 <= n - p - 1) {
+                    if (balance + 1 <= (n - j) - 1) {
                         balance++;
                     } else if (budget > 0) {
-                        modifications.set(p);
-                        chars[p] = BRACKET_CLOSE;
                         balance--;
                         budget--;
                     } else {
@@ -54,8 +42,6 @@ public class BracketsRotation {
                     if (balance > 0) {
                         balance--;
                     } else if (budget > 0) {
-                        modifications.set(p);
-                        chars[p] = BRACKET_OPEN;
                         balance++;
                         budget--;
                     } else {
@@ -66,15 +52,12 @@ public class BracketsRotation {
                 }
 
                 if (balance == 0) {
-                    detectionRight = p + 1;
-                    detectionCost = k - budget;
-                    result = Math.max(result, detectionRight - detectionLeft);
+                    result = Math.max(result, j - i + 1);
                 }
             }
         }
 
         return result;
     }
-
 
 }
