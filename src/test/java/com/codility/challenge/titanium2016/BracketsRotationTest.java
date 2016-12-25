@@ -7,13 +7,13 @@ import org.junit.Test;
 
 import java.util.Random;
 
-public class BracketsRotationSlowTest {
+public class BracketsRotationTest {
 
-    private BracketsRotationSlow solution;
+    private BracketsRotation solution;
 
     @Before
     public void setUp() throws Exception {
-        this.solution = new BracketsRotationSlow();
+        this.solution = new BracketsRotation();
     }
 
     @Test
@@ -70,6 +70,9 @@ public class BracketsRotationSlowTest {
 
     @Test
     public void test6() throws Exception {
+        Assert.assertEquals(6, solution.solution(")((()()(", 1));
+        Assert.assertEquals(6, solution.solution(")()()))(", 1));
+
         Assert.assertEquals(4, solution.solution(")()()(", 0));
         Assert.assertEquals(4, solution.solution(")()()(", 1));
         Assert.assertEquals(6, solution.solution(")()()(", 2));
@@ -77,8 +80,22 @@ public class BracketsRotationSlowTest {
 
     @Test
     public void test7() throws Exception {
+        Assert.assertEquals(2, solution.solution(")))(", 2));
+        Assert.assertEquals(2, solution.solution(")(((", 2));
+
         Assert.assertEquals(0, solution.solution(")(", 1));
         Assert.assertEquals(2, solution.solution(")(", 2));
+
+        Assert.assertEquals(2, solution.solution("))((", 1));
+        Assert.assertEquals(4, solution.solution("))((", 2));
+
+        Assert.assertEquals(4, solution.solution("))(((", 2));
+        Assert.assertEquals(4, solution.solution(")))((", 2));
+
+        Assert.assertEquals(2, solution.solution(")))(((", 1));
+        Assert.assertEquals(4, solution.solution(")))(((", 2));
+        Assert.assertEquals(4, solution.solution(")))(((", 3));
+        Assert.assertEquals(6, solution.solution(")))(((", 4));
 
         Assert.assertEquals(2, solution.solution(")(((", 2));
         Assert.assertEquals(4, solution.solution(")(((", 3));
@@ -138,35 +155,19 @@ public class BracketsRotationSlowTest {
         Assert.assertEquals(4, solution.solution("(((((((", 2));
     }
 
-
-    @Test
-    public void test12() throws Exception {
-        String s;
-
-        s = "(()((()))()())()((()(()()()((((";
-        Assert.assertEquals(20, solution.solution(s, 2));
-
-        s = "(()((()))()())()((()(()()()((((((()))(";
-        Assert.assertEquals(21, solution.solution(s, 2));
-    }
-
     @Test
     public void testVerifier() throws Exception {
+        BracketsRotationSlow verifier = new BracketsRotationSlow();
         Random random = new Random(1);
 
         for (int i = 0; i < 128; i++) {
             final int length = 4 + random.nextInt(256);
+            final int budget = random.nextInt(length);
             final String brackets = BracketsRotationUtils.generateRandom(length, 0.5, random);
 
-            final int r1 = solution.solution(brackets, 0);
-            Assert.assertEquals(0, r1 % 2);
-
-            final int r2 = solution.solution(brackets, 2);
-            Assert.assertTrue(brackets, r2 >= r1);
-
-            final int r3 = solution.solution(brackets, 4);
-            Assert.assertTrue(brackets, r3 >= r2);
+            final int r1 = verifier.solution(brackets, budget);
+            final int r2 = solution.solution(brackets, budget);
+            Assert.assertEquals(String.format("s=%s, l=%d, b=%d", brackets, length, budget), r1, r2);
         }
     }
-
 }

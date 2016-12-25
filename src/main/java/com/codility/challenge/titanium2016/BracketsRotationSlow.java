@@ -3,8 +3,10 @@ package com.codility.challenge.titanium2016;
 /**
  * https://codility.com/programmers/task/brackets_rotation/
  *
+ * <pre>
  * time: O(n**2)
  * space: O(1)
+ * </pre>
  */
 public class BracketsRotationSlow {
 
@@ -38,7 +40,7 @@ public class BracketsRotationSlow {
                     } else {
                         break;
                     }
-                } else if (c == BRACKET_CLOSE) {
+                } else {
                     if (balance > 0) {
                         balance--;
                     } else if (budget > 0) {
@@ -47,8 +49,6 @@ public class BracketsRotationSlow {
                     } else {
                         break;
                     }
-                } else {
-                    throw new IllegalArgumentException("Unknown char: " + c);
                 }
 
                 if (balance == 0) {

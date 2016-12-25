@@ -1,4 +1,4 @@
-package com.codility.challenge.titanium2016;
+package com.codility.challenge.titanium2016.util;
 
 import java.util.Random;
 

@@ -7,9 +7,11 @@ import java.util.Deque;
 /**
  * https://codility.com/programmers/task/brackets_rotation/
  *
+ * <pre>
  * No rotation is allowed
  * time: O(n)
  * space: O(n)
+ * </pre>
  */
 public class BracketsRotationNone {
 
@@ -33,15 +35,13 @@ public class BracketsRotationNone {
         for (int i = 0; i < n; i++) {
             final char c = chars[i];
 
-            if (c == BRACKET_OPEN) {
-                stack.addLast(i);
-            } else if (c == BRACKET_CLOSE) {
+            if (c == BRACKET_CLOSE) {
                 if (!stack.isEmpty()) {
                     final int openBracketIndex = stack.removeLast();
                     matches[openBracketIndex] = i;
                 }
             } else {
-                throw new IllegalArgumentException("Unknown char: " + c);
+                stack.addLast(i);
             }
         }
 
