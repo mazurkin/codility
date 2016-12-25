@@ -20,12 +20,10 @@ public class BracketsRotation {
     private static final char BRACKET_CLOSE = ')';
 
     public int solution(String s, int k) {
+        assert k >= 0;
+
         if (s == null || s.length() < 2) {
             return 0;
-        }
-
-        if (k < 0) {
-            throw new IllegalArgumentException("k value is invalid");
         }
 
         final int n = s.length();
@@ -115,64 +113,13 @@ public class BracketsRotation {
                 }
             }
 
+            assert isEven(r - l);
+
             final int length = bounds[r + 1] - bounds[l] - 1;
+            assert isEven(length);
+
             result = Math.max(result, length);
         }
-
-        /*
-        if (closeBracketCount >= swing) {
-            for (int i = 0, limit = closeBracketCount - swing, l = 0, r = l + 1 + swing;
-                 i <= limit; i++, l++, r++)
-            {
-                final int length = bounds[r] - bounds[l] - 1;
-                result = Math.max(result, length);
-            }
-        }
-
-        if (openBracketCount >= swing) {
-            for (int i = 0, limit = openBracketCount - swing, l = closeBracketCount, r = l + 1 + swing;
-                 i <= limit; i++, l++, r++)
-            {
-                final int length = bounds[r] - bounds[l] - 1;
-                result = Math.max(result, length);
-            }
-        }
-
-        if (isOdd(closeBracketCount) && availableBudget > (closeBracketCount + 1) / 2) {
-            final int overheadBudget = availableBudget - (closeBracketCount + 1) / 2;
-            final int l = 0;
-            final int r = Math.min(closeBracketCount + overheadBudget * 2, totalBracketCount + 1);
-            final int length = bounds[r] - bounds[l] - 1;
-            result = Math.max(result, length);
-        }
-
-        if (isOdd(openBracketCount) && availableBudget > (openBracketCount + 1) / 2) {
-            final int overheadBudget = availableBudget - (openBracketCount + 1) / 2;
-            final int l = Math.max(closeBracketCount - overheadBudget * 2 + 1, 0);
-            final int r = totalBracketCount + 1;
-            final int length = bounds[r] - bounds[l] - 1;
-            result = Math.max(result, length);
-        }
-
-        if (availableBudget >= 2 && closeBracketCount > 1 && openBracketCount > 1) {
-            final int limitL = Math.min(closeBracketCount / 2, availableBudget - 1);
-            final int limitR = openBracketCount / 2;
-            int l = closeBracketCount - 2 * limitL;
-            int r = closeBracketCount + 1 + 2 * Math.min(limitR, availableBudget - limitL);
-
-            for (int i = 0; i < limitL && i < limitR; i++, l += 2, r += 2)
-            {
-                final int length = bounds[r] - bounds[l] - 1;
-                result = Math.max(result, length);
-            }
-        }
-
-        if (closeBracketCount > 0 && openBracketCount > 0) {
-            final int m = closeBracketCount;
-            final int length = bounds[m + 1] - bounds[m] - 1;
-            result = Math.max(result, length);
-        }
-        */
 
         return result;
     }

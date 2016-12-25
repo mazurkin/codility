@@ -1,12 +1,8 @@
 package com.codility.challenge.titanium2016;
 
-import com.codility.challenge.titanium2016.stage.BracketsRotationSlow;
-import com.codility.challenge.titanium2016.util.BracketsRotationUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Random;
 
 public class BracketsRotationTest {
 
@@ -162,21 +158,5 @@ public class BracketsRotationTest {
 
         Assert.assertEquals(4, solution.solution(")))))))", 2));
         Assert.assertEquals(4, solution.solution("(((((((", 2));
-    }
-
-    @Test
-    public void testVerifier() throws Exception {
-        BracketsRotationSlow verifier = new BracketsRotationSlow();
-        Random random = new Random(1);
-
-        for (int i = 0; i < 128; i++) {
-            final int length = 4 + random.nextInt(256);
-            final int budget = random.nextInt(length);
-            final String brackets = BracketsRotationUtils.generateRandom(length, 0.5, random);
-
-            final int r1 = verifier.solution(brackets, budget);
-            final int r2 = solution.solution(brackets, budget);
-            Assert.assertEquals(String.format("s=%s, l=%d, b=%d", brackets, length, budget), r1, r2);
-        }
     }
 }
