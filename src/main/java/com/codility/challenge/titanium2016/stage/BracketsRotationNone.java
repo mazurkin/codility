@@ -1,4 +1,4 @@
-package com.codility.challenge.titanium2016;
+package com.codility.challenge.titanium2016.stage;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;

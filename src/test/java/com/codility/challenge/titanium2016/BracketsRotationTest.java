@@ -1,5 +1,6 @@
 package com.codility.challenge.titanium2016;
 
+import com.codility.challenge.titanium2016.stage.BracketsRotationSlow;
 import com.codility.challenge.titanium2016.util.BracketsRotationUtils;
 import org.junit.Assert;
 import org.junit.Before;
@@ -76,6 +77,14 @@ public class BracketsRotationTest {
         Assert.assertEquals(4, solution.solution(")()()(", 0));
         Assert.assertEquals(4, solution.solution(")()()(", 1));
         Assert.assertEquals(6, solution.solution(")()()(", 2));
+
+        Assert.assertEquals(4, solution.solution("))()()((", 0));
+        Assert.assertEquals(6, solution.solution("))()()((", 1));
+        Assert.assertEquals(8, solution.solution("))()()((", 2));
+
+        Assert.assertEquals(4, solution.solution(")))()()(((", 0));
+        Assert.assertEquals(6, solution.solution(")))()()(((", 1));
+        Assert.assertEquals(8, solution.solution(")))()()(((", 2));
     }
 
     @Test

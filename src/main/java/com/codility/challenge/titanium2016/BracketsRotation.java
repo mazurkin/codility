@@ -29,12 +29,6 @@ public class BracketsRotation {
         }
 
         final int n = s.length();
-
-        final int maxRequiredBudget = n / 2 + 1;
-        if (maxRequiredBudget <= k) {
-            return isOdd(n) ? n - 1 : n;
-        }
-
         final char[] chars = s.toCharArray();
 
         if (isOdd(n)) {
@@ -48,6 +42,13 @@ public class BracketsRotation {
 
     private int solution(final char[] chars, final int left, final int right, final int availableBudget) {
         final int count = right - left;
+        assert isEven(count);
+
+        final int maxRequiredBudget = count / 2 + 1;
+        if (maxRequiredBudget <= availableBudget) {
+            return count;
+        }
+
         final int swing = 2 * availableBudget;
 
         final Deque<Integer> openBracketStack = new ArrayDeque<>(count);
@@ -70,10 +71,12 @@ public class BracketsRotation {
         // count orphans
         final int openBracketCount = openBracketStack.size();
         final int closeBracketCount = closeBracketStack.size();
-        final int totalBracketCount = openBracketCount + closeBracketCount;
 
-        final int requiredBudget = (openBracketCount + 1) / 2 + (closeBracketCount + 1) / 2;
-        if (requiredBudget <= availableBudget) {
+        final int totalBracketCount = openBracketCount + closeBracketCount;
+        assert isEven(totalBracketCount);
+
+        final int actualRequiredBudget = (openBracketCount + 1) / 2 + (closeBracketCount + 1) / 2;
+        if (actualRequiredBudget <= availableBudget) {
             return count;
         }
 
@@ -117,7 +120,6 @@ public class BracketsRotation {
         }
 
         /*
-
         if (closeBracketCount >= swing) {
             for (int i = 0, limit = closeBracketCount - swing, l = 0, r = l + 1 + swing;
                  i <= limit; i++, l++, r++)
@@ -163,6 +165,12 @@ public class BracketsRotation {
                 final int length = bounds[r] - bounds[l] - 1;
                 result = Math.max(result, length);
             }
+        }
+
+        if (closeBracketCount > 0 && openBracketCount > 0) {
+            final int m = closeBracketCount;
+            final int length = bounds[m + 1] - bounds[m] - 1;
+            result = Math.max(result, length);
         }
         */
 

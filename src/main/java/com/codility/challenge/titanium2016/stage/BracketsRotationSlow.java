@@ -1,4 +1,4 @@
-package com.codility.challenge.titanium2016;
+package com.codility.challenge.titanium2016.stage;
 
 /**
  * https://codility.com/programmers/task/brackets_rotation/

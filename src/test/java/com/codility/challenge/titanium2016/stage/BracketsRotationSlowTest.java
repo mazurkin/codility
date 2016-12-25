@@ -1,5 +1,6 @@
-package com.codility.challenge.titanium2016;
+package com.codility.challenge.titanium2016.stage;
 
+import com.codility.challenge.titanium2016.stage.BracketsRotationSlow;
 import com.codility.challenge.titanium2016.util.BracketsRotationUtils;
 import org.junit.Assert;
 import org.junit.Before;
