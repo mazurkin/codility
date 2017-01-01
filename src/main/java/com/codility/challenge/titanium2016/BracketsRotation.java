@@ -47,8 +47,6 @@ public class BracketsRotation {
             return count;
         }
 
-        final int swing = 2 * availableBudget;
-
         final Deque<Integer> openBracketStack = new ArrayDeque<>(count);
         final Deque<Integer> closeBracketStack = new ArrayDeque<>(count);
 
@@ -97,7 +95,7 @@ public class BracketsRotation {
         int result = 0;
 
         for (int l = 0, r; l <= totalBracketCount; l++) {
-            r = l + swing;
+            r = l + 2 * availableBudget;
 
             if (l < closeBracketCount && r > closeBracketCount && isOdd(closeBracketCount - l)) {
                 r = r - 2;

@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Random;
+
 public class BracketsRotationTest {
 
     private BracketsRotation solution;
@@ -159,4 +161,85 @@ public class BracketsRotationTest {
         Assert.assertEquals(4, solution.solution(")))))))", 2));
         Assert.assertEquals(4, solution.solution("(((((((", 2));
     }
+
+    @Test
+    public void test12() throws Exception {
+        Assert.assertEquals(8, solution.solution("))()()((", 2));
+        Assert.assertEquals(8, solution.solution("))()()((", 4));
+        Assert.assertEquals(8, solution.solution("))()()((", 5));
+        Assert.assertEquals(8, solution.solution("))()()((", 6));
+        Assert.assertEquals(8, solution.solution("))()()((", 8));
+        Assert.assertEquals(8, solution.solution("))()()((", 100));
+
+        Assert.assertEquals(8, solution.solution("))()()()", 2));
+        Assert.assertEquals(8, solution.solution("))()()()", 4));
+        Assert.assertEquals(8, solution.solution("))()()()", 5));
+        Assert.assertEquals(8, solution.solution("))()()()", 6));
+        Assert.assertEquals(8, solution.solution("))()()()", 8));
+        Assert.assertEquals(8, solution.solution("))()()()", 100));
+
+        Assert.assertEquals(8, solution.solution("()()()((", 2));
+        Assert.assertEquals(8, solution.solution("()()()((", 4));
+        Assert.assertEquals(8, solution.solution("()()()((", 5));
+        Assert.assertEquals(8, solution.solution("()()()((", 6));
+        Assert.assertEquals(8, solution.solution("()()()((", 8));
+        Assert.assertEquals(8, solution.solution("()()()((", 100));
+
+        Assert.assertEquals(8, solution.solution("()))((()", 2));
+        Assert.assertEquals(8, solution.solution("()))((()", 4));
+        Assert.assertEquals(8, solution.solution("()))((()", 5));
+        Assert.assertEquals(8, solution.solution("()))((()", 6));
+
+        Assert.assertEquals(8, solution.solution("()))((()(", 2));
+        Assert.assertEquals(8, solution.solution("()))((()(", 4));
+        Assert.assertEquals(8, solution.solution("()))((()(", 5));
+        Assert.assertEquals(8, solution.solution("()))((()(", 6));
+
+        Assert.assertEquals(8, solution.solution(")()))((()", 2));
+        Assert.assertEquals(8, solution.solution(")()))((()", 4));
+        Assert.assertEquals(8, solution.solution(")()))((()", 5));
+        Assert.assertEquals(8, solution.solution(")()))((()", 6));
+
+        Assert.assertEquals(8, solution.solution(")))()()(", 4));
+    }
+
+    @Test
+    public void testRandomValid() throws Exception {
+        Random random = new Random(1);
+
+        for (int i = 0, limit = 16 * 1024; i < limit; i++) {
+            final int n = 2 * (1 + random.nextInt(64));
+            final String brackets = BracketsRotationUtils.generateRandomValid(n, random);
+
+            Assert.assertEquals(brackets, n, solution.solution(brackets, 0));
+            Assert.assertEquals(brackets, n, solution.solution(brackets, 1));
+            Assert.assertEquals(brackets, n, solution.solution(brackets, 2));
+            Assert.assertEquals(brackets, n, solution.solution(brackets, 3));
+        }
+    }
+
+    @Test
+    public void testRandomInvalid() throws Exception {
+        Random random = new Random(1);
+
+        for (int i = 0, limit = 16 * 1024; i < limit; i++) {
+            final int n = 2 * (1 + random.nextInt(64));
+            final int invalid = 2 * (1 + random.nextInt(n));
+            final int openCount = random.nextInt(invalid + 1);
+            final int closedCount = invalid - openCount;
+            final String brackets = BracketsRotationUtils.generateRandomInvalid(n, openCount, closedCount, random);
+
+            final int total = n + invalid;
+            final String description = String.format("b=%s, n=%d, (=%d, )=%d", brackets, n, openCount, closedCount);
+
+            Assert.assertNotEquals(description, total, solution.solution(brackets, 0));
+            Assert.assertNotEquals(description, total, solution.solution(brackets, invalid / 2 - 1));
+
+            Assert.assertEquals(description, total, solution.solution(brackets, invalid));
+            Assert.assertEquals(description, total, solution.solution(brackets, invalid + 1));
+            Assert.assertEquals(description, total, solution.solution(brackets, invalid + 2));
+            Assert.assertEquals(description, total, solution.solution(brackets, invalid * 2));
+        }
+    }
+
 }

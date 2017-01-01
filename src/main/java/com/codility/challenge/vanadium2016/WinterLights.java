@@ -12,8 +12,7 @@ public class WinterLights {
     }
 
     /**
-     * time: O(n)
-     * space: O(n)
+     * time: O(n), space: O(n)
      */
     public int solutionBest(String s, int dictionarySize) {
         if (s == null || s.isEmpty()) {
@@ -66,8 +65,7 @@ public class WinterLights {
 
 
     /**
-     * time: O(n)
-     * space: O(n)
+     * time: O(n), space: O(n)
      */
     public int solutionGood(String s, int dictionarySize) {
         if (s == null || s.isEmpty()) {
@@ -121,8 +119,7 @@ public class WinterLights {
     }
 
     /**
-     * time: O(n**2)
-     * space: O(1)
+     * time: O(n**2), space: O(1)
      */
     public int solutionSlow(String s) {
         if (s == null || s.isEmpty()) {
