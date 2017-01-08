@@ -242,4 +242,37 @@ public class BracketsRotationTest {
         }
     }
 
+    @Test
+    public void testMassive1() throws Exception {
+        final int depth = 6;
+
+        BracketsRotationUtils.iterateAll(depth, (s) ->
+                Assert.assertEquals(s, 2 * depth, solution.solution(s, 0)));
+
+    }
+
+    @Test
+    public void testMassive2() throws Exception {
+        final int depth = 6;
+
+        BracketsRotationUtils.iterateAll(depth, (s) -> {
+            final String m = ")" + s + "(";
+            Assert.assertEquals(m, 2 * depth, solution.solution(m, 0));
+            Assert.assertEquals(m, 2 * depth, solution.solution(m, 1));
+            Assert.assertEquals(m, 2 * depth + 2, solution.solution(m, 2));
+        });
+    }
+
+    @Test
+    public void testInvalid() throws Exception {
+        for (int close = 1; close < 7; close++) {
+            for (int open = 1; open < 7; open++) {
+                final String brackets = BracketsRotationUtils.generateInvalid(close, open);
+
+                Assert.assertEquals(brackets, 0, solution.solution(brackets, 0));
+                Assert.assertNotEquals(brackets, 0, solution.solution(brackets, 2));
+            }
+        }
+
+    }
 }

@@ -1,6 +1,7 @@
 package com.codility.challenge.titanium2016;
 
 import java.util.Random;
+import java.util.function.Consumer;
 
 public final class BracketsRotationUtils {
 
@@ -97,6 +98,39 @@ public final class BracketsRotationUtils {
 
         for (int i = 0; i < closeCount; i++) {
             sb.insert(0, ')');
+        }
+
+        return sb.toString();
+    }
+
+    public static void iterateAll(int depth, Consumer<String> validator) {
+        iterateAll(validator, depth, 0, "");
+    }
+
+    // http://stackoverflow.com/a/3172190/827139
+    public static void iterateAll(Consumer<String> validator, int openStock, int closeStock, String s) {
+        if (openStock == 0 && closeStock == 0) {
+            validator.accept(s);
+        }
+
+        if (openStock > 0) {
+            iterateAll(validator, openStock - 1, closeStock + 1, s + "(");
+        }
+
+        if (closeStock > 0) {
+            iterateAll(validator, openStock, closeStock - 1, s + ")");
+        }
+    }
+
+    public static String generateInvalid(int closeCount, int openCount) {
+        StringBuilder sb = new StringBuilder(closeCount + openCount);
+
+        for (int i = 0; i < closeCount; i++) {
+            sb.append(")");
+        }
+
+        for (int i = 0; i < openCount; i++) {
+            sb.append("(");
         }
 
         return sb.toString();

@@ -47,8 +47,8 @@ public class BracketsRotation {
             return count;
         }
 
-        final Deque<Integer> openBracketStack = new ArrayDeque<>(count);
         final Deque<Integer> closeBracketStack = new ArrayDeque<>(count);
+        final Deque<Integer> openBracketStack = new ArrayDeque<>(count);
 
         for (int i = left; i < right; i++) {
             final char c = chars[i];
@@ -65,13 +65,13 @@ public class BracketsRotation {
         }
 
         // count orphans
-        final int openBracketCount = openBracketStack.size();
         final int closeBracketCount = closeBracketStack.size();
+        final int openBracketCount = openBracketStack.size();
 
-        final int totalBracketCount = openBracketCount + closeBracketCount;
+        final int totalBracketCount = closeBracketCount + openBracketCount;
         assert isEven(totalBracketCount);
 
-        final int actualRequiredBudget = (openBracketCount + 1) / 2 + (closeBracketCount + 1) / 2;
+        final int actualRequiredBudget = (closeBracketCount + 1) / 2 + (openBracketCount + 1) / 2;
         if (actualRequiredBudget <= availableBudget) {
             return count;
         }
