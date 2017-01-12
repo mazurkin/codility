@@ -15,10 +15,17 @@ already finished [Codility.com](https://codility.com/programmers/challenges/) ch
 
 #### titanium2016
 
-One test fails - score is 92% :(
+One single test fails - score is 92% :(
 
 [Task](https://codility.com/programmers/task/brackets_rotation/)
 [Solution](src/main/java/com/codility/challenge/titanium2016/BracketsRotation.java)
+
+#### scandium2016
+
+Working on it. Solution seems to be right but need to properly choose one of the correct results.
+
+[Task](https://codility.com/programmers/task/even_sums_game/)
+[Solution](src/main/java/com/codility/challenge/scandium2016/EvenSumsGame.java)
 
 #### gamma2011
 
